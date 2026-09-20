@@ -37,8 +37,7 @@ public final class KeyBindings {
             "key.testmod.open_gui",
             KeyConflictContext.IN_GAME,
             InputConstants.Type.KEYSYM,
-            GLFW.GLFW_KEY_J,
-            InputConstants.thisMethodDoesNotExist(),  // 故意制造编译错误
+            GLFW.GLFW_KEY_K,
             "key.categories.testmod");
 
     private KeyBindings() {}
