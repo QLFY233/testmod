@@ -1,0 +1,14 @@
+{
+  "key.categories.testmod": "Test Mod",
+  "key.testmod.open_gui": "Open Test GUI",
+
+  "testmod.screen.title": "Test Mod — GUI Demo",
+  "testmod.field.name": "Text Field",
+  "testmod.field.name.hint": "Type something…",
+  "testmod.checkbox.fancy": "Fancy mode",
+  "testmod.slider.amount": "Amount: %s",
+  "testmod.label.value": "Slider value: %s",
+  "testmod.label.input": "Text field: %s",
+  "testmod.button.reset": "Reset",
+  "testmod.button.close": "Close"
+}

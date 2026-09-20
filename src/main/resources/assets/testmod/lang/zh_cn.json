@@ -1,0 +1,14 @@
+{
+  "key.categories.testmod": "测试模组",
+  "key.testmod.open_gui": "打开测试界面",
+
+  "testmod.screen.title": "测试模组 — GUI 演示",
+  "testmod.field.name": "文本框",
+  "testmod.field.name.hint": "输入点什么…",
+  "testmod.checkbox.fancy": "华丽模式",
+  "testmod.slider.amount": "数量：%s",
+  "testmod.label.value": "滑块值：%s",
+  "testmod.label.input": "文本框内容：%s",
+  "testmod.button.reset": "重置",
+  "testmod.button.close": "关闭"
+}
