@@ -37,7 +37,7 @@ public final class KeyBindings {
             "key.testmod.open_gui",
             KeyConflictContext.IN_GAME,
             InputConstants.Type.KEYSYM,
-            GLFW.GLFW_KEY_K,
+            GLFW.GLFW_KEY_J,
             "key.categories.testmod");
 
     private KeyBindings() {}

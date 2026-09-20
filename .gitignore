@@ -38,3 +38,6 @@ run/
 **/src/generated/**/.cache/
 repo/
 !**/src/**/repo/
+
+### 构建产物下载目录（tools/build.py 用）###
+.build/
