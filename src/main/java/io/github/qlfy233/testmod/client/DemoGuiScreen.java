@@ -5,6 +5,7 @@ import net.minecraft.client.gui.components.AbstractSliderButton;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.Checkbox;
 import net.minecraft.client.gui.components.EditBox;
+import net.minecraft.client.gui.components.Renderable;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.Mth;
@@ -94,7 +95,15 @@ public class DemoGuiScreen extends Screen {
 
     @Override
     public void render(GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
-        // 1) 背景。传入 mouseX/mouseY 让模糊背景的正确性有保障
+        // ★ 这里既不调 super.render()，也只把背景画一次。
+        //
+        // 原因：super.render() 内部第一件事就是调 renderBackground（javap 反汇编确认），
+        // 而 renderBackground → renderBlurredBackground 在 1.21.1 是「延迟到下一帧生效」的模糊效果。
+        // 自己再调一次，模糊就会叠到本帧已经画好的文字上。
+        // 症状很典型：背景和控件都清晰，只有文字发虚。
+        //
+        // 所以我在这里显式调一次 renderBackground，然后自己遍历 renderables 画控件，
+        // 绕开 super.render() 里那次多余的背景调用。
         this.renderBackground(graphics, mouseX, mouseY, partialTick);
 
         int cx = this.width / 2;
@@ -103,15 +112,24 @@ public class DemoGuiScreen extends Screen {
         int left = cx - panelW / 2;
         int top = this.height / 2 - panelH / 2;
 
-        // 2) 面板本体 + 边框
+        // ① 面板本体 + 边框
         graphics.fill(left, top, left + panelW, top + panelH, PANEL_BG);
         graphics.renderOutline(left, top, panelW, panelH, PANEL_BORDER);
 
-        // 3) 标题
+        // ② 面板上的自绘文字（压在面板之上）
         graphics.drawCenteredString(this.font, this.title, cx, top + 12, TEXT_MAIN);
         graphics.hLine(left + 8, left + panelW - 8, top + 28, PANEL_BORDER);
+        this.paintStatusText(graphics, left, top, panelH);
 
-        // 4) 实时显示控件的当前值（改任何控件这里都会跟着变）
+        // ③ 最后画各控件，保证它们在最上层。
+        // renderables 是 Screen 的 public 字段（javap 确认），手动遍历即可。
+        for (Renderable renderable : this.renderables) {
+            renderable.render(graphics, mouseX, mouseY, partialTick);
+        }
+    }
+
+    /** 面板下方的两行实时状态文字。 */
+    private void paintStatusText(GuiGraphics graphics, int left, int top, int panelH) {
         String state = this.nameField.getValue().isEmpty() ? "-" : this.nameField.getValue();
         graphics.drawString(this.font,
                 Component.translatable("testmod.label.input", state),
@@ -120,9 +138,6 @@ public class DemoGuiScreen extends Screen {
         graphics.drawString(this.font,
                 Component.translatable("testmod.label.value", this.valueSlider.displayValue()),
                 left + 12, top + panelH - 64, TEXT_VALUE, false);
-
-        // 5) 控件自身（放在最后画，保证盖在面板之上）
-        super.render(graphics, mouseX, mouseY, partialTick);
     }
 
     @Override
