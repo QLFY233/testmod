@@ -1,14 +1,21 @@
 {
   "key.categories.testmod": "Test Mod",
   "key.testmod.open_gui": "Open Test GUI",
-
-  "testmod.screen.title": "Test Mod — GUI Demo",
+  "key.testmod.open_rgb": "Open RGB Picker",
+  "testmod.button.close": "Close",
+  "testmod.button.reset": "Reset",
+  "testmod.checkbox.fancy": "Fancy mode",
   "testmod.field.name": "Text Field",
   "testmod.field.name.hint": "Type something…",
-  "testmod.checkbox.fancy": "Fancy mode",
-  "testmod.slider.amount": "Amount: %s",
-  "testmod.label.value": "Slider value: %s",
   "testmod.label.input": "Text field: %s",
-  "testmod.button.reset": "Reset",
-  "testmod.button.close": "Close"
+  "testmod.label.value": "Slider value: %s",
+  "testmod.rgb.blue": "Blue: %s",
+  "testmod.rgb.channels": "R %s / G %s / B %s",
+  "testmod.rgb.green": "Green: %s",
+  "testmod.rgb.hint": "Drag inside the swatch to pick a color",
+  "testmod.rgb.random": "Random",
+  "testmod.rgb.red": "Red: %s",
+  "testmod.rgb.title": "Test Mod — RGB Picker",
+  "testmod.screen.title": "Test Mod — GUI Demo",
+  "testmod.slider.amount": "Amount: %s"
 }

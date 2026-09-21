@@ -1,14 +1,21 @@
 {
   "key.categories.testmod": "测试模组",
   "key.testmod.open_gui": "打开测试界面",
-
-  "testmod.screen.title": "测试模组 — GUI 演示",
+  "key.testmod.open_rgb": "打开 RGB 取色",
+  "testmod.button.close": "关闭",
+  "testmod.button.reset": "重置",
+  "testmod.checkbox.fancy": "华丽模式",
   "testmod.field.name": "文本框",
   "testmod.field.name.hint": "输入点什么…",
-  "testmod.checkbox.fancy": "华丽模式",
-  "testmod.slider.amount": "数量：%s",
-  "testmod.label.value": "滑块值：%s",
   "testmod.label.input": "文本框内容：%s",
-  "testmod.button.reset": "重置",
-  "testmod.button.close": "关闭"
+  "testmod.label.value": "滑块值：%s",
+  "testmod.rgb.blue": "蓝：%s",
+  "testmod.rgb.channels": "R %s / G %s / B %s",
+  "testmod.rgb.green": "绿：%s",
+  "testmod.rgb.hint": "在色块内拖动可选取颜色",
+  "testmod.rgb.random": "随机",
+  "testmod.rgb.red": "红：%s",
+  "testmod.rgb.title": "测试模组 — RGB 取色",
+  "testmod.screen.title": "测试模组 — GUI 演示",
+  "testmod.slider.amount": "数量：%s"
 }

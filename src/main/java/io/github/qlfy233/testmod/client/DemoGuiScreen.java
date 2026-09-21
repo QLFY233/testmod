@@ -62,8 +62,10 @@ public class DemoGuiScreen extends Screen {
         this.addRenderableWidget(fancyCheckbox);
 
         // ── 滑块 ────────────────────────────────────────────────
+        // 初始 message 传 empty 即可：构造器内部会立刻调 updateMessage() 填上真实文本，
+        // 传一个没参数的 translatable 反而会短暂显示成 "Amount: %s" 字面量。
         this.valueSlider = new ValueSlider(left + 12, top + 96, panelW - 24, 20,
-                Component.translatable("testmod.slider.amount"), 0.5D);
+                Component.empty(), 0.5D);
         this.addRenderableWidget(this.valueSlider);
 
         // ── 按钮 ────────────────────────────────────────────────

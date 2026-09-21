@@ -16,7 +16,11 @@ import org.lwjgl.glfw.GLFW;
 import io.github.qlfy233.testmod.TestMod;
 
 /**
- * 按键绑定：默认 K 键打开 {@link DemoGuiScreen}。
+ * 按键绑定：
+ * <ul>
+ *   <li><b>K</b> → {@link DemoGuiScreen}（文本框 / 复选框 / 滑块）</li>
+ *   <li><b>R</b> → {@link RgbPickerScreen}（RGB 取色）</li>
+ * </ul>
  *
  * <p><b>关于事件总线</b>：在 1.21.1，{@code @EventBusSubscriber} 的 {@code bus} 参数已被废弃且<b>被忽略</b>，
  * 总线由事件类型自动判定——实现了 {@code IModBusEvent} 的走 mod 总线，其余走 game 总线。
@@ -40,13 +44,22 @@ public final class KeyBindings {
             GLFW.GLFW_KEY_K,
             "key.categories.testmod");
 
+    /** R 键打开 RGB 取色界面。 */
+    public static final KeyMapping OPEN_RGB = new KeyMapping(
+            "key.testmod.open_rgb",
+            KeyConflictContext.IN_GAME,
+            InputConstants.Type.KEYSYM,
+            GLFW.GLFW_KEY_R,
+            "key.categories.testmod");
+
     private KeyBindings() {}
 
     /** mod 总线事件：把按键注册进游戏的「选项 → 控制」列表。不注册就永远不会触发。 */
     @SubscribeEvent
     public static void onRegisterKeyMappings(RegisterKeyMappingsEvent event) {
         event.register(OPEN_GUI);
-        TestMod.LOGGER.info("Registered key mapping: key.testmod.open_gui");
+        event.register(OPEN_RGB);
+        TestMod.LOGGER.info("Registered key mappings: open_gui (K), open_rgb (R)");
     }
 
     /**
@@ -57,11 +70,18 @@ public final class KeyBindings {
      */
     @SubscribeEvent
     public static void onClientTick(ClientTickEvent.Post event) {
+        Minecraft minecraft = Minecraft.getInstance();
+
         while (OPEN_GUI.consumeClick()) {
-            Minecraft minecraft = Minecraft.getInstance();
             // 已经开着别的界面时不要强行顶掉（例如聊天栏、背包）
             if (minecraft.screen == null) {
                 minecraft.setScreen(new DemoGuiScreen());
+            }
+        }
+
+        while (OPEN_RGB.consumeClick()) {
+            if (minecraft.screen == null) {
+                minecraft.setScreen(new RgbPickerScreen());
             }
         }
     }
